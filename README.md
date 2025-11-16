@@ -8,10 +8,10 @@ Very simple Python websockets server that broadcasts client music information su
 - **Description:**  
   The backend server script written in Python.
 - **Functionality:**  
-  - Starts a web server (likely using Flask, FastAPI, or similar).
+  - Starts a websockets server.
   - Handles client connections.
-  - Broadcasts messages to all connected clients.
-  - May use WebSockets or HTTP endpoints for real-time communication.
+  - Broadcasts state changes to all connected clients.
+  - Uses WebSockets for real-time communication.
 
 ### client.html
 
