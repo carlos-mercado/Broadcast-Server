@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>WebSocket Demo (Carlos Mercado)</title>
+        <style>
+            body {
+                background-color: #181818;
+                color: #f1f1f1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                margin: 0;
+                font-family: Arial, sans-serif;
+            }
+            #data {
+                margin-bottom: 20px;
+            }
+            #coverArt {
+                width: 500px;
+                height: 500px;
+                object-fit: cover;
+                display: block;
+                margin: 0 auto 20px auto;
+            }
+            input[type="text"] {
+                background: #222;
+                color: #f1f1f1;
+                border: 1px solid #444;
+                border-radius: 4px;
+                padding: 8px;
+                margin-bottom: 10px;
+                width: 200px;
+                text-align: center;
+            }
+            button {
+                background: #333;
+                color: #f1f1f1;
+                border: none;
+                border-radius: 4px;
+                padding: 10px 20px;
+                cursor: pointer;
+                margin-top: 10px;
+            }
+            button:hover {
+                background: #444;
+            }
+            p {
+                margin: 10px 0 5px 0;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 id="data"></h1>
+        <img id="coverArt"></img>
+        <p>New Artist / Title: </p><input type="text" id="newArtistTitle"/>
+        <p>Link to New Cover Art: </p><input type="text" id="newCover"/>
+        <br>
+        <br>
+        <button onClick="sendData()">Update Data</button>
+        <script>
+            const title = document.getElementById("data");
+            const img = document.getElementById("coverArt");
+
+            const websocket = new WebSocket("ws://192.168.1.173:8000/");
+
+            window.addEventListener("DOMContentLoaded", () => {
+                websocket.onmessage = ({ data }) => {
+                    const obj = JSON.parse(data);
+
+                    title.innerHTML = obj.artistTitle;
+                    img.src = obj.image;
+                };
+            });
+
+            function sendData()
+            {
+                const textData = document.getElementById("newArtistTitle").value;
+                const imageData = document.getElementById("newCover").value;
+                const outgoingData = {"artistTitle" : textData, "image" : imageData};
+                websocket.send(JSON.stringify(outgoingData));
+                alert("submitted " + JSON.stringify(outgoingData));
+            }
+        </script>
+    </body>
+</html>
