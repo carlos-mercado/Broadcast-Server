@@ -63,7 +63,7 @@
             const title = document.getElementById("data");
             const img = document.getElementById("coverArt");
 
-            const websocket = new WebSocket("ws://192.168.1.173:8000/");
+            const websocket = new WebSocket("ws://localhost:8000/");
 
             window.addEventListener("DOMContentLoaded", () => {
                 websocket.onmessage = ({ data }) => {
