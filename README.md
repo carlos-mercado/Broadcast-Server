@@ -18,7 +18,7 @@ Very simple Python websockets server that broadcasts client music information su
 - **Description:**  
   The frontend client for connecting to the broadcast server.
 - **Functionality:**  
-  - Connects to the backend server (possibly via WebSocket or HTTP).
+  - Connects to the backend server.
   - Sends and receives broadcast messages.
   - Provides a simple UI for user interaction.
 
@@ -31,6 +31,7 @@ Very simple Python websockets server that broadcasts client music information su
 
 2. **Open the client:**
    - Open `client.html` in your web browser.
+   - *note* If opening the file from another device other than the device the server is running on, change localhost to the ip-address of the server device
    - Follow on-screen instructions to connect and interact.
 
 ## Requirements
